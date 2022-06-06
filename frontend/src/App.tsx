@@ -4,7 +4,7 @@ import { Routes } from './routes';
 import { BrowserRouter } from 'react-router-dom';
 function App() {
   const { userId, login, logout, token } = useAuth();
-  const isAuthenticated = !!token;
+  const isAuthenticated: boolean = !!token;
   return (
     <div className="App">
       <BrowserRouter>

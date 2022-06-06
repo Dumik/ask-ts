@@ -1,10 +1,15 @@
 import { useState, useCallback } from 'react';
 
+type BodyType = {
+  email: string | null | undefined;
+  password: string | null | undefined;
+};
+
 export const useHttp = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any>(null);
 
-  const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
+  const request = useCallback(async (url: string, method = 'GET', body: BodyType | null | string, headers?: any) => {
     try {
       if (body) {
         body = JSON.stringify(body);
@@ -20,7 +25,7 @@ export const useHttp = () => {
       }
       setLoading(true);
       return data;
-    } catch (error) {
+    } catch (error: any) {
       setLoading(false);
       setError(error.message);
       throw error;
