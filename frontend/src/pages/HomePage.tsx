@@ -1,6 +1,10 @@
 import { ContainerHomePage } from 'components/ContainerHomePage';
-// import { MainLayout } from 'layouts';
+import { PablicLayout } from 'layouts';
 
 export const HomePage = () => {
-  return <ContainerHomePage />;
+  return (
+    <PablicLayout>
+      <ContainerHomePage />
+    </PablicLayout>
+  );
 };

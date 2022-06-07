@@ -3,8 +3,8 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-export const AuthPage = () => {
+import { Button } from 'legos';
+export const ContainerSignUpPage = () => {
   const { request, error } = useHttp();
   const formSchema = Yup.object().shape({
     password: Yup.string().required('Password is mendatory').min(3, 'Password must be at 3 char long'),
@@ -41,15 +41,14 @@ export const AuthPage = () => {
     handlerSignUp(data.email, data.password);
   };
   return (
-    <div>
-      sign in
+    <div className=" w-96 ">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <p>email</p>
-        <input id="standard-required" type="Email" {...register('email', { require: true })} />
-        pass
-        <input id="standard-password-input" type="password" {...register('password', { require: true, min: 8 })} />
-        <button> sign in </button>
-        <button type="submit"> sign up </button>
+        <div className=" flex flex-col h-500 justify-center">
+          <input placeholder="Email" id="standard-required" type="Email" {...register('email', { require: true })} />
+          <input id="standard-password-input" type="password" {...register('password', { require: true, min: 8 })} />
+
+          <Button type="submit" title="Sign Up" style="w-full py-2" />
+        </div>
       </form>
     </div>
   );

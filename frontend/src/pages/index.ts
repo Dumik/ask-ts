@@ -1,2 +1,2 @@
-export * from './AuthPage';
+export * from './SignUpPage';
 export * from './HomePage';
