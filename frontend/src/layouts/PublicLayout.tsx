@@ -1,6 +1,6 @@
 import { Header, Footer } from 'components';
 
-export const PablicLayout = ({ children }: any) => {
+export const PublicLayout = ({ children }: any) => {
   return (
     <>
       <Header />

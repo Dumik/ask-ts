@@ -6,8 +6,6 @@ import { useHttp } from 'hooks';
 import { Button, Input } from 'legos';
 import { Fragment } from 'react';
 
-type SignUpFieldsType = {};
-
 const signUpFields = [
   {
     id: 'email-standard-required',
@@ -95,20 +93,10 @@ export const ContainerSignUpPage = () => {
       console.log('%c jordan e', 'color: lime; font-weight: bold; font-size: 16px; text-transform: uppercase', e);
     }
   };
-  // {id, fieldName, placeholder,type, component, label, options }
   const onSubmit: (data: any) => void = (data: BodyType) => {
     handlerSignUp(data.email, data.password);
   };
 
-  // component === 'input' ? (
-  //   <Input
-  //     placeholder={placeholder}
-  //     id={id}
-  //     type={type}
-  //     validation={register(fieldName, { require: true })}
-  //     error={errors[fieldName]?.message || null}
-  //   />
-  // ) : null
   return (
     <div className=" w-96">
       <form onSubmit={handleSubmit(onSubmit)}>

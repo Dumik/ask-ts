@@ -1,10 +1,10 @@
-import { ContainerSignUpPage } from 'components/ContainerSignUpPage';
-import { PablicLayout } from 'layouts';
+import { ContainerSignUpPage } from 'components';
+import { PublicLayout } from 'layouts';
 
 export const SignUpPage = () => {
   return (
-    <PablicLayout>
+    <PublicLayout>
       <ContainerSignUpPage />
-    </PablicLayout>
+    </PublicLayout>
   );
 };

@@ -1,10 +1,10 @@
-import { ContainerHomePage } from 'components/ContainerHomePage';
-import { PablicLayout } from 'layouts';
+import { ContainerHomePage } from 'components';
+import { PublicLayout } from 'layouts';
 
 export const HomePage = () => {
   return (
-    <PablicLayout>
+    <PublicLayout>
       <ContainerHomePage />
-    </PablicLayout>
+    </PublicLayout>
   );
 };

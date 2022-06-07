@@ -1,6 +1,6 @@
 import { Routes as Switch, Route } from 'react-router-dom';
-import { SignUpPage, HomePage } from '../pages';
-import { AUTH, HOME } from './path';
+import { SignUpPage, HomePage, SignInPage } from '../pages';
+import { SIGN_UP, SIGN_IN, HOME } from './path';
 
 export const Routes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   if (isAuthenticated) {
@@ -15,7 +15,8 @@ export const Routes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   return (
     <Switch>
       <Route path={HOME} element={<HomePage />} />
-      <Route path={AUTH} element={<SignUpPage />} />
+      <Route path={SIGN_UP} element={<SignUpPage />} />
+      <Route path={SIGN_IN} element={<SignInPage />} />
       <Route path="*" element={<HomePage />} />
     </Switch>
   );

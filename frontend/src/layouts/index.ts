@@ -1,1 +1,1 @@
-export * from './PablicLayout';
+export * from './PublicLayout';
