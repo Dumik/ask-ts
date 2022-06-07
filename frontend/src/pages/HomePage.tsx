@@ -1,3 +1,6 @@
+import { ContainerHomePage } from 'components/ContainerHomePage';
+// import { MainLayout } from 'layouts';
+
 export const HomePage = () => {
-  return <div>Home Page </div>;
+  return <ContainerHomePage />;
 };
