@@ -8,7 +8,7 @@ export const ContainerHomePage = () => {
     history(AUTH);
   };
   return (
-    <div className=" h-500 flex items-start justify-center flex-col ">
+    <div className=" h-550 flex items-start justify-center flex-col ">
       <p className=" text-white text-2xl font-bold ">Ask and Answer</p>
       <Button onClick={goToSignUp} title="Create account" />
     </div>
