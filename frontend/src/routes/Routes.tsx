@@ -6,8 +6,8 @@ export const Routes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   if (isAuthenticated) {
     return (
       <Switch>
-        <Route path={HOME} element={<HomePage />} />
-        <Route path="*" element={<HomePage />} />
+        <Route path={PROFILE} element={<ProfilePage />} />
+        <Route path="*" element={<ProfilePage />} />
       </Switch>
     );
   }
@@ -17,7 +17,6 @@ export const Routes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
       <Route path={HOME} element={<HomePage />} />
       <Route path={SIGN_UP} element={<SignUpPage />} />
       <Route path={SIGN_IN} element={<SignInPage />} />
-      <Route path={PROFILE} element={<ProfilePage />} />
       <Route path="*" element={<HomePage />} />
     </Switch>
   );

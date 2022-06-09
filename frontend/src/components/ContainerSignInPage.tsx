@@ -1,7 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
+import { useContext } from 'react';
 
+import { AuthContext } from 'context';
 import { useHttp } from 'hooks';
 import { Button, Input } from 'legos';
 import { Fragment } from 'react';
@@ -25,6 +27,7 @@ const signUpFields = [
 ];
 
 export const ContainerSignInPage = () => {
+  const { login } = useContext(AuthContext);
   const { request } = useHttp();
   const formSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
@@ -39,29 +42,25 @@ export const ContainerSignInPage = () => {
   }: any = useForm(formOptions);
 
   type BodyType = {
-    email: string | null | undefined;
+    username: string | null | undefined;
     password: string | null | undefined;
   };
 
-  const handlerSignUp = (email: string | null | undefined, password: string | null | undefined) => {
+  const handlerLogin = async (userData: BodyType) => {
     try {
-      console.log(
-        '%c jordan email',
-        'color: lime; font-weight: bold; font-size: 16px; text-transform: uppercase',
-        email,
-        password
-      );
-      const data: Promise<any> = request('/api/auth/signin', 'POST', {
-        email: email,
-        password: password,
+      const data: any = await request('/api/auth/login', 'POST', {
+        ...userData,
       });
-      console.log('%c jordan data', 'color: lime; font-weight: bold; font-size: 16px; text-transform: uppercase', data);
+
+      if (data.token && data.userId) {
+        login(data.token, data.userId);
+      }
     } catch (e) {
-      console.log('%c jordan e', 'color: lime; font-weight: bold; font-size: 16px; text-transform: uppercase', e);
+      console.log('%c jordan ERROR', 'color: red; font-weight: bold; font-size: 16px; text-transform: uppercase', e);
     }
   };
   const onSubmit: (data: any) => void = (data: BodyType) => {
-    handlerSignUp(data.email, data.password);
+    handlerLogin(data);
   };
 
   return (

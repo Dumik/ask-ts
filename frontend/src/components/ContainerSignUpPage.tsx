@@ -1,10 +1,23 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-
-import { useHttp } from 'hooks';
+import { useNavigate } from 'react-router-dom';
+import { useAuth, useHttp } from 'hooks';
 import { Button, Input } from 'legos';
 import { Fragment } from 'react';
+
+import { useContext } from 'react';
+import { AuthContext } from 'context';
+import { SIGN_IN } from 'routes';
+
+type BodyType = {
+  email: string | null | undefined;
+  password: string | null | undefined;
+  username: string | null | undefined;
+  fullName: string | null | undefined;
+  gander: string | null | undefined;
+  birthday: string | null | undefined;
+};
 
 const signUpFields = [
   {
@@ -56,6 +69,7 @@ const signUpFields = [
 ];
 
 export const ContainerSignUpPage = () => {
+  const history = useNavigate();
   const { request } = useHttp();
   const formSchema = Yup.object().shape({
     email: Yup.string().required('Email is required'),
@@ -71,30 +85,24 @@ export const ContainerSignUpPage = () => {
     formState: { errors },
   }: any = useForm(formOptions);
 
-  type BodyType = {
-    email: string | null | undefined;
-    password: string | null | undefined;
-  };
+  const { login } = useAuth();
 
-  const handlerSignUp = (email: string | null | undefined, password: string | null | undefined) => {
+  const handlerSignUp = (userData: BodyType) => {
     try {
-      console.log(
-        '%c jordan email',
-        'color: lime; font-weight: bold; font-size: 16px; text-transform: uppercase',
-        email,
-        password
-      );
-      const data: Promise<any> = request('/api/auth/signup', 'POST', {
-        email: email,
-        password: password,
+      const data: Promise<any> | any = request('/api/auth/signup', 'POST', {
+        ...userData,
       });
-      console.log('%c jordan data', 'color: lime; font-weight: bold; font-size: 16px; text-transform: uppercase', data);
+
+      if (data.token && data.userId) {
+        login(data.token, data.userId);
+        history(SIGN_IN);
+      }
     } catch (e) {
       console.log('%c jordan e', 'color: lime; font-weight: bold; font-size: 16px; text-transform: uppercase', e);
     }
   };
   const onSubmit: (data: any) => void = (data: BodyType) => {
-    handlerSignUp(data.email, data.password);
+    handlerSignUp(data);
   };
 
   return (
