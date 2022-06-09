@@ -16,7 +16,7 @@ router.post(
         return res.status(400).json({ errors: errors.array(), message: 'Wrong data' });
       }
       const { email, password, username, fullName, gender, birthday, answers } = req.body;
-      const candidate = await User.findOne({ email });
+      const candidate = await User.findOne({ username });
 
       if (candidate) {
         res.status(400).json({ message: 'User already exist' });

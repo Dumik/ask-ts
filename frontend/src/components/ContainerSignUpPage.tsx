@@ -1,12 +1,10 @@
 import * as Yup from 'yup';
 import { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useAuth, useHttp } from 'hooks';
 import { Button, Input } from 'legos';
-import { SIGN_IN } from 'routes';
 
 type BodyType = {
   email: string | null | undefined;
@@ -67,7 +65,6 @@ const signUpFields = [
 ];
 
 export const ContainerSignUpPage = () => {
-  const history = useNavigate();
   const { request } = useHttp();
   const formSchema = Yup.object().shape({
     email: Yup.string().required('Email is required'),
@@ -85,15 +82,14 @@ export const ContainerSignUpPage = () => {
 
   const { login } = useAuth();
 
-  const handlerSignUp = (userData: BodyType) => {
+  const handlerSignUp = async (userData: BodyType) => {
     try {
-      const data: Promise<any> | any = request('/api/auth/signup', 'POST', {
+      const data: Promise<any> | any = await request('/api/auth/signup', 'POST', {
         ...userData,
       });
 
       if (data.token && data.userId) {
         login(data.token, data.userId);
-        history(SIGN_IN);
       }
     } catch (e) {
       console.log('%c jordan e', 'color: lime; font-weight: bold; font-size: 16px; text-transform: uppercase', e);

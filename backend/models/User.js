@@ -10,7 +10,30 @@ const schema = new Schema({
   answers: [
     {
       type: Types.ObjectId,
+      ref: 'Answer',
+    },
+  ],
+  questions: [
+    {
+      type: Types.ObjectId,
+      ref: 'Question',
+    },
+  ],
+  likes: { type: Number, default: 0 },
+  gifts: { type: Number, default: 0 },
+  avatar: {
+    type: String,
+    default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
+  },
+  description: {
+    type: String,
+    default: 'Nothing about me...',
+  },
+  links: [
+    {
+      type: Types.ObjectId,
       ref: 'Link',
+      default: 'Don`t follow me...',
     },
   ],
 });
