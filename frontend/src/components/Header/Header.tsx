@@ -18,7 +18,10 @@ export const Header = () => {
   };
 
   return (
-    <div className=" flex justify-center  h-16 " style={{ background: 'linear-gradient(#214261, #1B3955, #1A304A)' }}>
+    <div
+      className=" fixed w-full flex justify-center  h-16 "
+      style={{ background: 'linear-gradient(#214261, #1B3955, #1A304A)' }}
+    >
       <div className="flex w-820 justify-between">
         <div>
           <img onClick={goHome} className=" h-16 w-auto cursor-pointer" src={logo} alt="" />

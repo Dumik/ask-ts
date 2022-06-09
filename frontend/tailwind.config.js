@@ -7,6 +7,7 @@ module.exports = {
       },
       colors: {
         button: '#ffffff',
+        mainBg: '#274C67',
       },
       width: {
         820: '820px',

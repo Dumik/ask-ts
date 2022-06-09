@@ -5,7 +5,7 @@ export const PublicLayout = ({ children }: any) => {
     <>
       <Header />
       <div className="flex justify-center h-550" style={{ background: '#027FAE' }}>
-        <div className=" w-820">{children}</div>
+        <div className=" mt-16  w-820">{children}</div>
       </div>
       <Footer />
     </>
