@@ -1,6 +1,7 @@
 import { Header, Footer } from 'components';
+import { ReactNode } from 'react';
 
-export const PublicLayout = ({ children }: any) => {
+export const PublicLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header />

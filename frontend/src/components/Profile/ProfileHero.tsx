@@ -48,6 +48,7 @@ export const ProfileHero = () => {
               <p className=" text-blue-400">gifts</p>
             </div>
           </div>
+          {/* eslint-disable-next-line */}
           <Button title="+ Follow" style=" w-48 mt-10 mr-4" />
           <div className="mt-6 flex items-center justify-end mr-5">
             <img className=" h-4 w-auto cursor-pointer" src={gift} alt="" />

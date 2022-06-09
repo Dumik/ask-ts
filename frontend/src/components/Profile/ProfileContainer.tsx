@@ -23,6 +23,8 @@ export const ProfileContainer = () => {
 
   useEffect(() => {
     handlerLogin(userId);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   return (

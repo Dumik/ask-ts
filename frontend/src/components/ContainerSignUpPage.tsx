@@ -1,21 +1,19 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
+import { Fragment } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { useAuth, useHttp } from 'hooks';
 import { Button, Input } from 'legos';
-import { Fragment } from 'react';
-
-import { useContext } from 'react';
-import { AuthContext } from 'context';
 import { SIGN_IN } from 'routes';
 
 type BodyType = {
   email: string | null | undefined;
+  gander: string | null | undefined;
   password: string | null | undefined;
   username: string | null | undefined;
   fullName: string | null | undefined;
-  gander: string | null | undefined;
   birthday: string | null | undefined;
 };
 
@@ -150,7 +148,7 @@ export const ContainerSignUpPage = () => {
               ) : null}
             </Fragment>
           ))}
-
+          {/* eslint-disable-next-line */}
           <Button type="submit" title="Sign Up" style="py-2 w-52" />
         </div>
       </form>

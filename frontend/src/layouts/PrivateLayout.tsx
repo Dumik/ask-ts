@@ -1,6 +1,6 @@
 import { Header, Footer } from 'components';
-
-export const PrivateLayout = ({ children }: any) => {
+import { ReactNode } from 'react';
+export const PrivateLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header />

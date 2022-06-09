@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
 export const useAuth = () => {
-  const [token, setToken] = useState<any>(null);
-  const [userId, setUserId] = useState<any>(null);
+  const [token, setToken] = useState<string | undefined | null>(null);
+  const [userId, setUserId] = useState<string | undefined | null>(null);
 
   const login = useCallback((jwtToken?: string, id?: string) => {
     setToken(jwtToken);

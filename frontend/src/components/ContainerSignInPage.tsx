@@ -59,7 +59,7 @@ export const ContainerSignInPage = () => {
       console.log('%c jordan ERROR', 'color: red; font-weight: bold; font-size: 16px; text-transform: uppercase', e);
     }
   };
-  const onSubmit: (data: any) => void = (data: BodyType) => {
+  const onSubmit: (data: BodyType) => void = (data: BodyType) => {
     handlerLogin(data);
   };
 
@@ -80,7 +80,7 @@ export const ContainerSignInPage = () => {
               ) : null}
             </Fragment>
           ))}
-
+          {/* eslint-disable-next-line */}
           <Button type="submit" title="Login" style="py-2 w-52" />
         </div>
       </form>
