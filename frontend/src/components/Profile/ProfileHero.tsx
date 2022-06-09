@@ -38,8 +38,8 @@ export const ProfileHero = ({ user }: any) => {
               <p className=" text-blue-400">likes</p>
             </div>
             <div>
-              <p className="text-xl font-bold">0</p>
-              <p className=" text-blue-400">{user?.gifts}</p>
+              <p className="text-xl font-bold">{user?.gifts}</p>
+              <p className=" text-blue-400">gifts</p>
             </div>
           </div>
           {/* eslint-disable-next-line */}

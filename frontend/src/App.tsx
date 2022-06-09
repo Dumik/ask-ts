@@ -5,11 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthContext } from 'context';
 
 function App() {
-  const { userId, login, logout, token } = useAuth();
+  const { userId, login, logout, token, me } = useAuth();
   const isAuthenticated: boolean = !!token;
 
   return (
-    <AuthContext.Provider value={{ token, userId, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ token, userId, login, logout, isAuthenticated, me }}>
       <BrowserRouter>
         <Routes isAuthenticated={isAuthenticated} />
       </BrowserRouter>
