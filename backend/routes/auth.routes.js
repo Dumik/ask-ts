@@ -6,22 +6,16 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 
 const router = Router();
-
 router.post(
   '/signup',
-  [
-    check('email', 'Email is wrong'),
-    check('password', 'Password must be 6 or more symbol').isLength({ min: 6 }),
-  ],
+  [check('email', 'Email is wrong'), check('password', 'Password must be 6 or more symbol').isLength({ min: 6 })],
   async (req, res) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res
-          .status(400)
-          .json({ errors: errors.array(), message: 'Wrong data' });
+        return res.status(400).json({ errors: errors.array(), message: 'Wrong data' });
       }
-      const { email, password } = req.body;
+      const { email, password, username, fullName, gender, birthday, answers } = req.body;
       const candidate = await User.findOne({ email });
 
       if (candidate) {
@@ -29,47 +23,9 @@ router.post(
       }
 
       const hashedPassword = await bcrypt.hash(password, 12);
-      const user = new User({ email, password: hashedPassword });
+      const user = new User({ email, password: hashedPassword, username, fullName, gender, birthday });
 
       await user.save();
-
-      res.status(201).json({ message: 'User created!' });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: 'Something is wrong... Please try again' });
-    }
-  }
-);
-
-router.post(
-  '/login',
-  [
-    check('email', 'Email is wrong'),
-    check('password', 'Password must be 6 or more symbol'),
-  ],
-  async (req, res) => {
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res
-          .status(400)
-          .json({ errors: errors.array(), message: 'Wrong data' });
-      }
-
-      const { email, password } = req.body;
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        return res.status(400).json({ message: "User doesn't exist" });
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-
-      if (!isMatch) {
-        res.status(400).json({
-          message: 'Something is wrong... Please try again to sign in',
-        });
-      }
 
       const token = jwt.sign(
         {
@@ -81,13 +37,48 @@ router.post(
         }
       );
 
-      res.json({ token, userId: user.id });
+      res.status(201).json({ message: 'User created!', token, userId: user.id });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: 'Something is wrong... Please try again' });
+      res.status(500).json({ message: error });
     }
   }
 );
+
+router.post('/login', [check('password', 'Password must be 6 or more symbol')], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array(), message: 'Wrong data' });
+    }
+
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(400).json({ message: "User doesn't exist" });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      res.status(400).json({
+        message: 'Something is wrong... Please try again to sign in',
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        userId: user.id,
+      },
+      config.get('jwtSecret'),
+      {
+        expiresIn: '1h',
+      }
+    );
+
+    res.json({ token, userId: user.id });
+  } catch (error) {
+    res.status(500).json({ message: 'Something is wrong... Please try again' });
+  }
+});
 
 module.exports = router;
